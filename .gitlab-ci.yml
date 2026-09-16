@@ -1,0 +1,30 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH'
+stages:
+  - verify
+
+default:
+  image: plugfox/flutter:3.47.4
+  before_script:
+    - flutter pub get
+
+format:
+  stage: verify
+  script:
+    - dart format --output=none --set-exit-if-changed .
+
+analyze:
+  stage: verify
+  script:
+    - flutter analyze
+
+test:
+  stage: verify
+  script:
+    - flutter test
