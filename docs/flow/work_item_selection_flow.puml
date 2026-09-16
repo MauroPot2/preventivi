@@ -1,0 +1,29 @@
+@startuml
+
+start
+
+:Cerco o seleziono lavorazione nel catalogo;
+
+if (Lavorazione presente?) then (Si)
+
+  :Seleziono lavorazione;
+  :Inserisco quantità;
+  :Modifico eventualmente il prezzo;
+  :Aggiungo al preventivo;
+
+else (No)
+
+  :Apri work_item_form_flow;
+
+  if (Salvare nel catalogo?) then (Si)
+    :Salvo lavorazione nel catalogo;
+  endif
+
+  :Inserisco quantità;
+  :Modifico eventualmente il prezzo;
+  :Aggiungo al preventivo;
+endif
+
+stop
+
+@enduml

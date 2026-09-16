@@ -1,0 +1,23 @@
+@startuml
+
+start
+
+:Utente autenticato;
+
+:Apro impostazioni / profilo;
+
+if (Vuoi effettuare il logout?) then (Si)
+
+  :Eseguo logout;
+  :Cancello sessione locale;
+  :Mostro Login;
+
+else (No)
+
+  :Torno all'app;
+
+endif
+
+stop
+
+@enduml

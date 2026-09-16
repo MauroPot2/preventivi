@@ -1,0 +1,41 @@
+@startuml
+
+start
+
+:Visualizzo form cliente;
+
+:Inserisco / modifico nome o ragione sociale;
+
+:Inserisco / modifico telefono;
+
+:Inserisco / modifico email;
+
+:Inserisco / modifico indirizzo;
+
+if (Vuoi aggiungere dati fiscali?) then (Si)
+
+  :Inserisco / modifico Codice Fiscale;
+
+  :Inserisco / modifico Partita IVA;
+
+  :Inserisco / modifico PEC;
+
+  :Inserisco / modifico Codice Destinatario;
+
+endif
+
+if (Nome e telefono validi?) then (Si)
+
+  :Confermo cliente;
+
+else (No)
+
+  :Mostro errori di validazione;
+
+  :Correggo dati;
+
+endif
+
+stop
+
+@enduml

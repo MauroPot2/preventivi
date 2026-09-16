@@ -1,0 +1,88 @@
+@startuml
+
+start
+
+:Apro l'app;
+
+if (Database locale presente?) then (Si)
+
+  :Uso dati locali;
+
+else (No)
+
+  if (Utente autenticato?) then (Si)
+
+    :Cerco backup cloud;
+
+    if (Backup disponibile?) then (Si)
+
+      :Mostro data ultimo backup;
+
+      if (Vuoi ripristinare il backup?) then (Si)
+
+        :Scarico backup;
+        :Ripristino database locale;
+        :Apro Homepage;
+
+      else (No)
+
+        :Creo nuovo database locale;
+        :Apro Homepage;
+
+      endif
+
+    else (No)
+
+      :Creo nuovo database locale;
+      :Apro Homepage;
+
+    endif
+
+  else (No)
+
+    :Creo nuovo database locale;
+    :Apro Homepage;
+
+  endif
+
+endif
+
+
+repeat
+
+  :Utente utilizza l'app;
+
+  if (Dati modificati?) then (Si)
+
+    :Salvo immediatamente in locale;
+    :Segno backup come necessario;
+
+  endif
+
+repeat while (App in uso?) is (Si)
+
+
+if (Backup necessario?) then (Si)
+
+  if (Connessione disponibile?) then (Si)
+
+    if (Backup giornaliero già eseguito?) then (No)
+
+      :Creo snapshot database locale;
+      :Carico backup su Firebase;
+      :Aggiorno data ultimo backup;
+      :Segno backup completato;
+
+    endif
+
+  else (No)
+
+    :Mantengo backup in attesa;
+
+  endif
+
+endif
+
+stop
+
+@enduml

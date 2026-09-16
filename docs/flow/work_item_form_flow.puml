@@ -1,0 +1,24 @@
+@startuml
+
+start
+
+:Visualizzo form lavorazione;
+
+:Inserisco / modifico nome;
+
+:Inserisco / modifico descrizione;
+
+:Seleziono unità di misura;
+
+:Inserisco / modifico prezzo base;
+
+if (Dati validi?) then (Si)
+  :Confermo lavorazione;
+else (No)
+  :Mostro errori di validazione;
+  :Correggo dati;
+endif
+
+stop
+
+@enduml

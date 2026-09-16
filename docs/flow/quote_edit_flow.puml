@@ -1,0 +1,67 @@
+@startuml
+
+start
+
+if (Preventivo in bozza?) then (Si)
+  :Modifico preventivo corrente;
+else (No)
+  :Preparo nuova revisione;
+endif
+
+repeat
+
+  :Visualizzo dati del preventivo;
+
+  switch (Cosa vuoi modificare?)
+
+    case (Cliente)
+      :Cambio cliente associato;
+
+    case (Aggiungi lavorazione)
+      :Apri work_item_selection;
+
+    case (Modifica lavorazione)
+      :Seleziono voce del preventivo;
+      :Modifico quantità / prezzo;
+
+    case (Elimina lavorazione)
+      :Seleziono voce del preventivo;
+
+      if (Confermi eliminazione?) then (Si)
+        :Elimino voce dal preventivo;
+      else (No)
+        :Annulla;
+      endif
+
+    case (Sconto)
+      :Modifico sconto;
+
+    case (IVA)
+      :Modifico IVA;
+
+    case (Note)
+      :Modifico note;
+
+  endswitch
+
+repeat while (Vuoi modificare altro?) is (Si)
+
+:Visualizzo riepilogo aggiornato;
+
+if (Salvare modifiche?) then (Si)
+
+  if (Preventivo originale era in bozza?) then (Si)
+    :Aggiorno preventivo;
+  else (No)
+    :Creo e salvo nuova revisione;
+  endif
+
+else (No)
+
+  :Scarto modifiche;
+
+endif
+
+stop
+
+@enduml

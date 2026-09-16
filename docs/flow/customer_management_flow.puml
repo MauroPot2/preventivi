@@ -1,0 +1,51 @@
+@startuml
+
+start
+
+:Apro gestione clienti;
+
+repeat
+
+  :Visualizzo lista clienti;
+
+  if (Uso ricerca o filtro?) then (Si)
+    :Cerco / filtro clienti;
+  endif
+
+  switch (Cosa vuoi fare?)
+
+    case (Nuovo cliente)
+      :Apro customer_form_flow;
+      :Salvo nuovo cliente;
+
+    case (Apri cliente)
+      :Seleziono cliente;
+      :Visualizzo dettaglio cliente;
+
+      switch (Cosa vuoi fare?)
+
+        case (Modifica)
+          :Apro customer_form_flow;
+          :Salvo modifiche;
+
+        case (Elimina)
+          if (Confermi eliminazione?) then (Si)
+            :Elimino cliente;
+          else (No)
+            :Annulla;
+          endif
+
+        case (Visualizza preventivi)
+          :Mostro preventivi associati al cliente;
+
+      endswitch
+
+  endswitch
+
+repeat while (Rimani nella gestione clienti?) is (Si)
+
+:Torno alla Homepage;
+
+stop
+
+@enduml

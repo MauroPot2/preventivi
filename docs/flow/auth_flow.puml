@@ -1,0 +1,64 @@
+@startuml
+
+start
+
+:Apro l'app;
+
+if (Sessione valida?) then (Si)
+
+  :Recupero utente autenticato;
+  :Apro Homepage;
+
+else (No)
+
+  :Mostro schermata Login / Registrazione;
+
+  switch (Cosa vuoi fare?)
+
+    case (Login)
+
+      :Inserisco email;
+      :Inserisco password;
+
+      if (Credenziali valide?) then (Si)
+
+        :Autentico utente;
+        :Apro Homepage;
+
+      else (No)
+
+        :Mostro errore di autenticazione;
+
+      endif
+
+    case (Registrazione)
+
+      :Inserisco email;
+      :Inserisco password;
+      :Confermo password;
+
+      if (Dati validi?) then (Si)
+
+        :Creo account;
+        :Autentico utente;
+        :Apro Homepage;
+
+      else (No)
+
+        :Mostro errori di validazione;
+
+      endif
+
+    case (Password dimenticata)
+
+      :Inserisco email;
+      :Invio link di reset password;
+      :Torno al Login;
+
+  endswitch
+
+endif
+
+stop
+
+@enduml

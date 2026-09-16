@@ -1,0 +1,52 @@
+@startuml
+
+start
+
+:Apro Catalogo lavorazioni;
+
+repeat
+
+  :Visualizzo lista lavorazioni;
+
+  if (Uso ricerca o filtro?) then (Si)
+    :Cerco / filtro lavorazioni;
+  endif
+
+  switch (Cosa vuoi fare?)
+
+    case (Nuova lavorazione)
+
+      :Apri work_item_form_flow;
+      :Salvo nuova lavorazione nel catalogo;
+
+    case (Apri lavorazione)
+
+      :Seleziono lavorazione;
+      :Visualizzo dettaglio;
+
+      switch (Cosa vuoi fare?)
+
+        case (Modifica)
+
+          :Apri work_item_form_flow;
+          :Salvo modifiche;
+
+        case (Elimina)
+
+          if (Confermi eliminazione?) then (Si)
+            :Elimino lavorazione dal catalogo;
+          else (No)
+            :Annulla;
+          endif
+
+      endswitch
+
+  endswitch
+
+repeat while (Rimani nel catalogo?) is (Si)
+
+:Torno alla Homepage;
+
+stop
+
+@enduml

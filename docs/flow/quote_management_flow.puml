@@ -1,0 +1,55 @@
+@startuml
+
+start
+
+:Homepage/ Lista Preventivi;
+
+if(Uso ricerca o filtro?) then(Si)
+  :Cerco/ filtro preventivi;
+endif
+
+:Seleziono preventivo;
+
+
+
+repeat
+:Dettaglio preventivo;
+  switch (Cosa vuoi fare?) 
+
+  case(Visualizza)
+    :visualizza;
+
+  case(Modifica)
+    :Apri quote_edit_flow;
+    
+
+  case(Duplica)  
+    :duplica;
+    :Apro nuova bozza;
+
+  case(Genera Pdf)
+    :genera Pdf;
+    
+
+  case(Invia Pdf)
+    :Invia Pdf;
+    
+
+  case(Elimina)
+    if(Confermi eliminazione?) then (si)
+      :Elimina preventivo;
+      :Torno alla lista dei preventivi;
+      stop
+      else(No)
+      
+    endif
+
+  endswitch      
+
+repeat while(Rimani nel dettaglio?) is (Si)
+:Torno alla lista dei preventivi;
+
+
+stop
+
+@enduml

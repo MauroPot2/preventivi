@@ -1,0 +1,69 @@
+@startuml
+
+start
+
+:Apro l'app;
+
+if (Utente autenticato?) then (Sì)
+
+else (No)
+
+  if (Utente già registrato?) then (Sì)
+    :Login;
+  else (No)
+    :Registrazione;
+  endif
+
+endif
+
+:Homepage con lista preventivi;
+
+:Creo un nuovo preventivo;
+
+if (Cliente già registrato?) then (Sì)
+
+  :Seleziono cliente;
+
+else (No)
+
+  :Creo anagrafica minima cliente;
+
+endif
+
+repeat
+
+  :Aggiungo una lavorazione;
+
+
+  if (Lavorazione già presente?) then (Sì)
+
+    :Seleziono lavorazione;
+
+  else (No)
+
+    :Creo lavorazione;
+    :Salvo lavorazione nel catalogo;
+
+  endif
+
+  :Inserisco quantità;
+  :Modifico eventualmente il prezzo;
+  :Aggiungo lavorazione al preventivo;
+
+repeat while ("Aggiungere un'altra lavorazione?") is (Sì)
+
+:Riepilogo preventivo;
+
+:Modifico o elimino eventuali voci;
+
+:Applico sconto e IVA;
+
+:Controllo totale;
+
+:Genero PDF;
+
+:Invio preventivo;
+
+stop
+
+@enduml

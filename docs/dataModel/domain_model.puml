@@ -1,0 +1,106 @@
+@startuml
+
+hide methods
+skinparam classAttributeIconSize 0
+
+
+class User {
+  id : String
+}
+
+
+class Customer {
+  id : String
+  name : String
+  phone : String
+  email : String?
+  address : String?
+  fiscalCode : String?
+  vatNumber : String?
+  pec : String?
+  recipientCode : String?
+}
+
+
+class WorkItem {
+  id : String
+  name : String
+  description : String?
+  basePrice : Money
+  unitMeasurement : UnitMeasurement
+}
+
+
+class Quote {
+  id : String
+  quoteNumber : String
+  createdAt : DateTime
+  updatedAt : DateTime
+}
+
+
+class QuoteRevision {
+  id : String
+  revisionNumber : int
+  discountPercent : Decimal
+  vatPercent : Decimal
+  status : QuoteStatus
+  notes : String?
+  createdAt : DateTime
+  updatedAt : DateTime
+
+  /subtotal : Money
+  /discountAmount : Money
+  /vatAmount : Money
+  /total : Money
+}
+
+
+class QuoteItem {
+  id : String
+  workItemId : String?
+  name : String
+  description : String?
+  quantity : Decimal
+  unitMeasurement : UnitMeasurement
+  unitPrice : Money
+
+  /lineTotal : Money
+}
+
+
+enum UnitMeasurement {
+  hour
+  meter
+  squareMeter
+  cubicMeter
+  piece
+  flatRate
+}
+
+
+enum QuoteStatus {
+  draft
+  sent
+  accepted
+  rejected
+}
+
+
+User "1" -- "0..*" Customer : owns
+User "1" -- "0..*" WorkItem : owns
+User "1" -- "0..*" Quote : creates
+
+Customer "1" -- "0..*" Quote : receives
+
+Quote "1" *-- "1..*" QuoteRevision : revisions
+
+QuoteRevision "1" *-- "0..*" QuoteItem : contains
+
+QuoteItem "0..*" --> "0..1" WorkItem : originates from
+
+WorkItem --> UnitMeasurement
+QuoteItem --> UnitMeasurement
+QuoteRevision --> QuoteStatus
+
+@enduml
