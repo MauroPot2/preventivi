@@ -9,7 +9,7 @@ class Customer {
   final String? pec;
   final String? recipientCode;
 
-  Customer({
+  const Customer({
     required this.id,
     required this.name,
     required this.phone,
