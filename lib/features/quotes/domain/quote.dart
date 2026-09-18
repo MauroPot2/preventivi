@@ -2,6 +2,7 @@ import 'quote_revision.dart';
 
 class Quote {
   final String id;
+  final String customerId;
   final String quoteNumber;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -9,6 +10,7 @@ class Quote {
 
   Quote({
     required this.id,
+    required this.customerId,
     required this.quoteNumber,
     required this.createdAt,
     required this.updatedAt,
